@@ -1,6 +1,8 @@
 import pygame
+
+from src.Data.InputDataFile import InputDataFile
+from src.Data.InputDataStub import InputDataStub
 pygame.mixer.init()
-import os
 
 
 def PlaySound(filePath, currentMusic):
@@ -14,10 +16,11 @@ def PlaySound(filePath, currentMusic):
     return s
 
 
-
-def GetFileList():
-    files = os.listdir("../Music")
-    return files
+def getPlaylist(inputType):
+    directoryPath = "../Music"
+    inputType.setDirectoryPath(directoryPath)
+    playlist = inputType.getRawData()
+    return playlist
 
 def displayFiles(fileList):
     for entryNumber, entry in enumerate(fileList):
@@ -39,9 +42,10 @@ def GetFileToPlay(fileList):
 
 def main():
     soundPlayer = ""
-    musicFiles = GetFileList()
+    musicFiles = getPlaylist(InputDataFile())
     while True:
         fileName = GetFileToPlay(musicFiles)
         soundPlayer = PlaySound(fileName, soundPlayer)
 
-main()
+if __name__ == '__main__':
+    main()
