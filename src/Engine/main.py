@@ -9,7 +9,7 @@ def PlaySound(filePath, currentMusic, directoryPath):
     if pygame.mixer.get_busy():
         currentMusic.stop()
     pygame.mixer.init()
-    soundPlayer = pygame.mixer.Sound(directoryPath + filePath)
+    soundPlayer = pygame.mixer.Sound(directoryPath + "/" + filePath)
     soundPlayer.play()
     print("Now playing:",filePath)
 
@@ -36,7 +36,7 @@ def GetFileToPlay(fileList):
 
     return fileIdentifier
 
-def EnterCommand(soundPlayer, songList):
+def EnterCommand(soundPlayer, songList, directoryPath):
     command = input("Please enter a command")
 
 
@@ -51,7 +51,7 @@ def EnterCommand(soundPlayer, songList):
     elif command == "play":
 
         songName = GetFileToPlay(songList)
-        soundPlayer = PlaySound(songName, soundPlayer)
+        soundPlayer = PlaySound(songName, soundPlayer, directoryPath)
 
 
 
@@ -66,7 +66,7 @@ def main():
     directoryPath = "../../Music"
     musicFiles = getPlaylist(InputDataFile(), directoryPath)
     while True:
-        soundPlayer = EnterCommand(soundPlayer, musicFiles)
+        soundPlayer = EnterCommand(soundPlayer, musicFiles, directoryPath)
         #fileName = GetFileToPlay(musicFiles)
         #soundPlayer = PlaySound(fileName, soundPlayer)
 

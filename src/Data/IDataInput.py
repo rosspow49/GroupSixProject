@@ -1,7 +1,7 @@
-from abc import ABC, abstractmethod
+from abc import ABC as abstractBaseClass, abstractmethod
 
 
-class IDataInput(ABC):
+class IDataInput(abstractBaseClass):
 
     @abstractmethod
     def getRawData(self, directoryPath):
