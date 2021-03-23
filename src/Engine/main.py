@@ -9,11 +9,11 @@ def PlaySound(filePath, currentMusic):
     if pygame.mixer.get_busy():
         currentMusic.stop()
     pygame.mixer.init()
-    s = pygame.mixer.Sound("../Music/" +filePath)
-    s.play()
+    soundPlayer = pygame.mixer.Sound("../Music/" +filePath)
+    soundPlayer.play()
     print("Now playing:",filePath)
 
-    return s
+    return soundPlayer
 
 def getPlaylist(inputType, directoryPath):
     playlist = inputType.getRawData(directoryPath)

@@ -2,7 +2,7 @@ import unittest
 
 from src.Data.InputDataFile import InputDataFile
 from src.Data.InputDataStub import InputDataStub
-from src.main import getPlaylist
+from src.Engine.main import getPlaylist
 
 
 class InputTest(unittest.TestCase):
