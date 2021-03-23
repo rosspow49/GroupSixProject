@@ -13,7 +13,7 @@ class InputTest(unittest.TestCase):
 
     def test_InputDataStub(self):
         inputType = InputDataStub()
-        playlist = getPlaylist(inputType, "testMusic")
+        playlist = getPlaylist(inputType, "stubMusic")
         self.assertEqual(playlist[0], "bensound-dubstep.wav")
 
 

@@ -5,11 +5,11 @@ from src.Data.InputDataStub import InputDataStub
 pygame.mixer.init()
 
 
-def PlaySound(filePath, currentMusic):
+def PlaySound(filePath, currentMusic, directoryPath):
     if pygame.mixer.get_busy():
         currentMusic.stop()
     pygame.mixer.init()
-    soundPlayer = pygame.mixer.Sound("../Music/" +filePath)
+    soundPlayer = pygame.mixer.Sound(directoryPath + filePath)
     soundPlayer.play()
     print("Now playing:",filePath)
 
@@ -63,8 +63,8 @@ def EnterCommand(soundPlayer, songList):
 
 def main():
     soundPlayer = ""
-    directoryPath = "../Music"
-    musicFiles = getPlaylist(InputDataStub(), directoryPath)
+    directoryPath = "../../Music"
+    musicFiles = getPlaylist(InputDataFile(), directoryPath)
     while True:
         soundPlayer = EnterCommand(soundPlayer, musicFiles)
         #fileName = GetFileToPlay(musicFiles)
