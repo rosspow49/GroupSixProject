@@ -15,8 +15,8 @@ def PlaySound(filePath, currentMusic):
 
     return s
 
-def getPlaylist(inputType):
-    playlist = inputType.getRawData()
+def getPlaylist(inputType, directoryPath):
+    playlist = inputType.getRawData(directoryPath)
     return playlist
 
 def displayFiles(fileList):
@@ -63,7 +63,8 @@ def EnterCommand(soundPlayer, songList):
 
 def main():
     soundPlayer = ""
-    musicFiles = getPlaylist(InputDataFile())
+    directoryPath = "../Music"
+    musicFiles = getPlaylist(InputDataStub(), directoryPath)
     while True:
         soundPlayer = EnterCommand(soundPlayer, musicFiles)
         #fileName = GetFileToPlay(musicFiles)

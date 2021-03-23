@@ -8,13 +8,13 @@ from src.main import getPlaylist
 class InputTest(unittest.TestCase):
     def test_InputDataFile(self):
         inputType = InputDataFile()
-        playlist = getPlaylist(inputType)
-        self.assertEqual(playlist[1], "bensound-dubstep.wav")
+        playlist = getPlaylist(inputType, "../Music")
+        self.assertEqual(playlist[0], "Beat Of Success.mp3")
 
     def test_InputDataStub(self):
         inputType = InputDataStub()
-        playlist = getPlaylist(inputType)
-        self.assertEqual(playlist[0], "track1")
+        playlist = getPlaylist(inputType, "testMusic")
+        self.assertEqual(playlist[0], "bensound-dubstep.wav")
 
 
 if __name__ == '__main__':
