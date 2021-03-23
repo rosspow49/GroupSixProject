@@ -16,8 +16,6 @@ def PlaySound(filePath, currentMusic):
     return s
 
 def getPlaylist(inputType):
-    directoryPath = "../Music"
-    inputType.setDirectoryPath(directoryPath)
     playlist = inputType.getRawData()
     return playlist
 
