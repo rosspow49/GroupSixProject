@@ -3,11 +3,12 @@ import pygame
 from src.Data.InputDataFile import InputDataFile
 from src.Data.InputDataStub import InputDataStub
 from src.Display.ConsoleOutputs import *
-pygame.mixer.init()
 from src.Display.IOLogger import IOLogger
+pygame.mixer.init()
 
 
-def PlaySound(filePath, currentMusic, directoryPath, logger):
+
+def playSound(filePath, currentMusic, directoryPath, logger):
     if pygame.mixer.get_busy():
         currentMusic.stop()
     pygame.mixer.init()
@@ -47,11 +48,11 @@ def InitialiseLogs():
     with open("Logs/OutputLog.txt", "w") as outputs:
         outputs.write("")
 
-def enterCommand(soundPlayer, songList, directoryPath):
-    command = input("Please enter a command")
+def enterCommand(soundPlayer, songList, directoryPath, logger = IOLogger()):
+    command = logger.TakeInput("Please enter a command")
 
     if command == "stop":
-        stopSound(soundPlayer)
+        stopSound(soundPlayer, logger)
 
     elif command == "play":
 

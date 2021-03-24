@@ -1,5 +1,5 @@
 
 
-def displayFiles(fileList):
+def displayFiles(fileList, logger):
     for entryNumber, entry in enumerate(fileList):
-        print(entryNumber, ":", entry)
+        logger.ShowOutput(str(entryNumber) + ":" + entry)
