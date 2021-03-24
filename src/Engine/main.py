@@ -1,17 +1,18 @@
 import pygame
 
 from src.Data.InputDataFile import InputDataFile
-from src.Data.InputDataStub import InputDataStub
+
 pygame.mixer.init()
+from src.Display.IOLogger import IOLogger
 
 
-def PlaySound(filePath, currentMusic, directoryPath):
+def PlaySound(filePath, currentMusic, directoryPath, logger):
     if pygame.mixer.get_busy():
         currentMusic.stop()
     pygame.mixer.init()
     soundPlayer = pygame.mixer.Sound(directoryPath + "/" + filePath)
     soundPlayer.play()
-    print("Now playing:",filePath)
+    logger.ShowOutput("Now playing:" + filePath)
 
     return soundPlayer
 
@@ -19,56 +20,55 @@ def getPlaylist(inputType, directoryPath):
     playlist = inputType.getRawData(directoryPath)
     return playlist
 
-def displayFiles(fileList):
+def displayFiles(fileList, logger):
     for entryNumber, entry in enumerate(fileList):
-        print(entryNumber, ":", entry)
+        logger.ShowOutput(str(entryNumber) + ":" + entry)
 
-def GetFileToPlay(fileList):
-    displayFiles(fileList)
+def GetFileToPlay(fileList, logger):
+    displayFiles(fileList, logger)
 
-    fileIdentifier = input("Please enter the file name or corresponding number")
-    while fileIdentifier not in fileList and int(fileIdentifier) not in range(len(fileList)):
-        print("This is an incorrect identifier")
-        fileIdentifier = input("Please enter the file name or corresponding number")
+    fileIdentifier = TakeInput("Please enter the file name or corresponding number")
+    while int(fileIdentifier) not in range(len(fileList)):
+        logger.ShowOutput("This is an incorrect identifier")
+        fileIdentifier = TakeInput("Please enter the corresponding number of the song you want to play")
 
     if int(fileIdentifier) in range(len(fileList)):
         fileIdentifier = fileList[int(fileIdentifier)]
 
     return fileIdentifier
 
-def EnterCommand(soundPlayer, songList, directoryPath):
-    command = input("Please enter a command")
+def InitialiseLogs():
+    with open("Logs/InputLog.txt", "w") as inputs:
+        inputs.write("")
+    with open("Logs/OutputLog.txt", "w") as outputs:
+        outputs.write("")
 
+def EnterCommand(soundPlayer, songList, directoryPath, logger = IOLogger):
+    command = logger.TakeInput("Please enter a command")
 
     if command == "stop":
         if pygame.mixer.get_busy():
             soundPlayer.stop()
         else:
-            print("There is no song playing at the moment")
+            logger.ShowOutput("There is no song playing at the moment")
 
-
-    # change to a multi step process
     elif command == "play":
 
-        songName = GetFileToPlay(songList)
-        soundPlayer = PlaySound(songName, soundPlayer, directoryPath)
-
-
+        songName = GetFileToPlay(songList, logger)
+        soundPlayer = PlaySound(songName, soundPlayer, directoryPath, logger)
 
     else:
-        print("That is not a valid command")
+        logger.ShowOutput("That is not a valid command")
+
     return soundPlayer
-
-
 
 def main():
     soundPlayer = ""
     directoryPath = "Music"
+    InitialiseLogs()
     musicFiles = getPlaylist(InputDataFile(), directoryPath)
     while True:
         soundPlayer = EnterCommand(soundPlayer, musicFiles, directoryPath)
-        #fileName = GetFileToPlay(musicFiles)
-        #soundPlayer = PlaySound(fileName, soundPlayer)
 
 
 if __name__ == '__main__':
