@@ -31,7 +31,7 @@ def getFileToPlay(fileList):
 
     fileIdentifier = input("Please enter the track number: ")
     while int(fileIdentifier) not in range(len(fileList)):
-        print("This is an incorrect identifier")
+        print("This is an invalid track number.")
         fileIdentifier = input("Please enter the track number: ")
 
     if int(fileIdentifier) in range(len(fileList)):
