@@ -6,14 +6,18 @@ pygame.mixer.init()
 
 
 def PlaySound(filePath, currentMusic, directoryPath):
-    if pygame.mixer.get_busy():
-        currentMusic.stop()
-    pygame.mixer.init()
+    stopSound(currentMusic)
     soundPlayer = pygame.mixer.Sound(directoryPath + "/" + filePath)
     soundPlayer.play()
     print("Now playing:",filePath)
 
     return soundPlayer
+
+def stopSound(soundPlayer):
+    if pygame.mixer.get_busy():
+        soundPlayer.stop()
+    else:
+        print("There is no song playing at the moment")
 
 def getPlaylist(inputType, directoryPath):
     playlist = inputType.getRawData(directoryPath)
@@ -41,10 +45,7 @@ def EnterCommand(soundPlayer, songList, directoryPath):
 
 
     if command == "stop":
-        if pygame.mixer.get_busy():
-            soundPlayer.stop()
-        else:
-            print("There is no song playing at the moment")
+        stopSound(soundPlayer)
 
 
     # change to a multi step process
