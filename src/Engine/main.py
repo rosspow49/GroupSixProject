@@ -63,7 +63,7 @@ def EnterCommand(soundPlayer, songList, directoryPath):
 
 def main():
     soundPlayer = ""
-    directoryPath = "../../Music"
+    directoryPath = "Music"
     musicFiles = getPlaylist(InputDataFile(), directoryPath)
     while True:
         soundPlayer = EnterCommand(soundPlayer, musicFiles, directoryPath)
