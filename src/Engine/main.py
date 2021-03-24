@@ -1,7 +1,8 @@
 import pygame
 
 from src.Data.InputDataFile import InputDataFile
-
+from src.Data.InputDataStub import InputDataStub
+from src.Display.ConsoleOutputs import *
 pygame.mixer.init()
 from src.Display.IOLogger import IOLogger
 
@@ -16,21 +17,24 @@ def PlaySound(filePath, currentMusic, directoryPath, logger):
 
     return soundPlayer
 
+def stopSound(soundPlayer, logger):
+    if pygame.mixer.get_busy():
+        soundPlayer.stop()
+        logger.ShowOutput("Song stopped.")
+    else:
+        logger.ShowOutput("There is no song playing at the moment")
+
 def getPlaylist(inputType, directoryPath):
     playlist = inputType.getRawData(directoryPath)
     return playlist
 
-def displayFiles(fileList, logger):
-    for entryNumber, entry in enumerate(fileList):
-        logger.ShowOutput(str(entryNumber) + ":" + entry)
-
-def GetFileToPlay(fileList, logger):
+def getFileToPlay(fileList, logger):
     displayFiles(fileList, logger)
 
-    fileIdentifier = TakeInput("Please enter the file name or corresponding number")
+    fileIdentifier = logger.TakeInput("Please enter the track number:")
     while int(fileIdentifier) not in range(len(fileList)):
-        logger.ShowOutput("This is an incorrect identifier")
-        fileIdentifier = TakeInput("Please enter the corresponding number of the song you want to play")
+        logger.ShowOutput("This is an invalid track number.")
+        fileIdentifier = logger.TakeInput("Please enter the track number:")
 
     if int(fileIdentifier) in range(len(fileList)):
         fileIdentifier = fileList[int(fileIdentifier)]
@@ -43,24 +47,22 @@ def InitialiseLogs():
     with open("Logs/OutputLog.txt", "w") as outputs:
         outputs.write("")
 
-def EnterCommand(soundPlayer, songList, directoryPath, logger = IOLogger):
-    command = logger.TakeInput("Please enter a command")
+def enterCommand(soundPlayer, songList, directoryPath):
+    command = input("Please enter a command")
 
     if command == "stop":
-        if pygame.mixer.get_busy():
-            soundPlayer.stop()
-        else:
-            logger.ShowOutput("There is no song playing at the moment")
+        stopSound(soundPlayer)
 
     elif command == "play":
 
-        songName = GetFileToPlay(songList, logger)
-        soundPlayer = PlaySound(songName, soundPlayer, directoryPath, logger)
+        songName = getFileToPlay(songList, logger)
+        soundPlayer = playSound(songName, soundPlayer, directoryPath, logger)
 
     else:
         logger.ShowOutput("That is not a valid command")
 
     return soundPlayer
+
 
 def main():
     soundPlayer = ""
@@ -68,7 +70,7 @@ def main():
     InitialiseLogs()
     musicFiles = getPlaylist(InputDataFile(), directoryPath)
     while True:
-        soundPlayer = EnterCommand(soundPlayer, musicFiles, directoryPath)
+        soundPlayer = enterCommand(soundPlayer, musicFiles, directoryPath)
 
 
 if __name__ == '__main__':
