@@ -2,63 +2,60 @@ import pygame
 
 from src.Data.InputDataFile import InputDataFile
 from src.Data.InputDataStub import InputDataStub
+from src.Display.ConsoleOutputs import *
+
 pygame.mixer.init()
 
 
-def PlaySound(filePath, currentMusic, directoryPath):
-    if pygame.mixer.get_busy():
-        currentMusic.stop()
-    pygame.mixer.init()
+def playSound(filePath, currentMusic, directoryPath):
+    stopSound(currentMusic)
     soundPlayer = pygame.mixer.Sound(directoryPath + "/" + filePath)
     soundPlayer.play()
-    print("Now playing:",filePath)
+    print("Now playing:", filePath)
 
     return soundPlayer
+
+def stopSound(soundPlayer):
+    if pygame.mixer.get_busy():
+        soundPlayer.stop()
+        print("Song stopped.")
+    else:
+        print("There is no song playing at the moment")
 
 def getPlaylist(inputType, directoryPath):
     playlist = inputType.getRawData(directoryPath)
     return playlist
 
-def displayFiles(fileList):
-    for entryNumber, entry in enumerate(fileList):
-        print(entryNumber, ":", entry)
-
-def GetFileToPlay(fileList):
+def getFileToPlay(fileList):
     displayFiles(fileList)
 
-    fileIdentifier = input("Please enter the file name or corresponding number")
-    while fileIdentifier not in fileList and int(fileIdentifier) not in range(len(fileList)):
-        print("This is an incorrect identifier")
-        fileIdentifier = input("Please enter the file name or corresponding number")
+    fileIdentifier = input("Please enter the track number: ")
+    while int(fileIdentifier) not in range(len(fileList)):
+        print("This is an invalid track number.")
+        fileIdentifier = input("Please enter the track number: ")
 
     if int(fileIdentifier) in range(len(fileList)):
         fileIdentifier = fileList[int(fileIdentifier)]
 
     return fileIdentifier
 
-def EnterCommand(soundPlayer, songList, directoryPath):
+def enterCommand(soundPlayer, songList, directoryPath):
     command = input("Please enter a command")
 
 
     if command == "stop":
-        if pygame.mixer.get_busy():
-            soundPlayer.stop()
-        else:
-            print("There is no song playing at the moment")
+        stopSound(soundPlayer)
 
 
     # change to a multi step process
     elif command == "play":
 
-        songName = GetFileToPlay(songList)
-        soundPlayer = PlaySound(songName, soundPlayer, directoryPath)
-
-
+        songName = getFileToPlay(songList)
+        soundPlayer = playSound(songName, soundPlayer, directoryPath)
 
     else:
         print("That is not a valid command")
     return soundPlayer
-
 
 
 def main():
@@ -66,9 +63,7 @@ def main():
     directoryPath = "Music"
     musicFiles = getPlaylist(InputDataFile(), directoryPath)
     while True:
-        soundPlayer = EnterCommand(soundPlayer, musicFiles, directoryPath)
-        #fileName = GetFileToPlay(musicFiles)
-        #soundPlayer = PlaySound(fileName, soundPlayer)
+        soundPlayer = enterCommand(soundPlayer, musicFiles, directoryPath)
 
 
 if __name__ == '__main__':
