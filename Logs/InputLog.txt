@@ -1,1 +1,1 @@
-play,2,play,1,stop,
+play,1,play,2,stop,play,2,play,2,stop,
