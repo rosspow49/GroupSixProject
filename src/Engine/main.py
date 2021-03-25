@@ -2,28 +2,11 @@ import pygame
 
 from src.Data.InputDataFile import InputDataFile
 from src.Data.InputDataStub import InputDataStub
+from src.Engine.trackControls import *
 from src.Display.ConsoleOutputs import *
 from src.Display.IOLogger import IOLogger
 
 pygame.mixer.init()
-
-
-def playSound(filePath, volume, logger):
-    pygame.mixer.stop()
-    soundPlayer = pygame.mixer.Sound(filePath)
-    pygame.mixer.Sound.set_volume(soundPlayer, volume)
-    soundPlayer.play()
-    logger.ShowOutput("Now playing: " + filePath)
-
-    return soundPlayer
-
-
-def stopSound(soundPlayer, logger):
-    if pygame.mixer.get_busy():
-        soundPlayer.stop()
-        logger.ShowOutput("Song stopped.")
-    else:
-        logger.ShowOutput("There is no song playing at the moment")
 
 
 def getPlaylist(inputType, directoryPath):
