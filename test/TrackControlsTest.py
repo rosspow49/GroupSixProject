@@ -6,7 +6,7 @@ from src.Display.IOLogger import IOLogger
 from src.Engine.trackControls import playSound, stopSound
 
 
-class trackControlsTest(unittest.TestCase):
+class TrackControlsTest(unittest.TestCase):
     def test_PlaySoundWithNoSongPlaying(self):
         pygame.mixer.init()
         filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
