@@ -8,13 +8,12 @@ from src.Display.IOLogger import IOLogger
 pygame.mixer.init()
 
 
-def playSound(filePath, directoryPath, volume, logger):
+def playSound(filePath, volume, logger):
     pygame.mixer.stop()
-    pygame.mixer.init()
-    soundPlayer = pygame.mixer.Sound(directoryPath + "/" + filePath)
+    soundPlayer = pygame.mixer.Sound(filePath)
     pygame.mixer.Sound.set_volume(soundPlayer, volume)
     soundPlayer.play()
-    logger.ShowOutput("Now playing:" + filePath)
+    logger.ShowOutput("Now playing: " + filePath)
 
     return soundPlayer
 
@@ -53,7 +52,7 @@ def InitialiseLogs():
         outputs.write("")
 
 
-def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, logger=IOLogger()):
+def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, logger):
     print(optionsList)
     command = logger.TakeInput("Please type one of the options").lower()
 
@@ -63,7 +62,8 @@ def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, logg
     elif command == "play":
 
         songName = getFileToPlay(songList, logger)
-        soundPlayer = playSound(songName, directoryPath, volume, logger)
+        filePath = directoryPath + songName
+        soundPlayer = playSound(filePath, volume, logger)
 
     elif command == "volume":
         volume = float(input("What would you like the volume to be between 0 for mute and 10?"))
@@ -77,13 +77,14 @@ def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, logg
 
 def main():
     soundPlayer = ""
-    directoryPath = "Music"
+    directoryPath = "Music/"
     optionsList = ["Play", "Stop", "Volume"]
     volume = 1.0
     InitialiseLogs()
     musicFiles = getPlaylist(InputDataFile(), directoryPath)
+    logger = IOLogger(True)
     while True:
-        soundPlayer, volume = enterCommand(soundPlayer, musicFiles, directoryPath, optionsList, volume)
+        soundPlayer, volume = enterCommand(soundPlayer, musicFiles, directoryPath, optionsList, volume, logger)
 
 
 if __name__ == '__main__':
