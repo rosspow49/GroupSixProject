@@ -8,7 +8,7 @@ from src.Display.IOLogger import IOLogger
 pygame.mixer.init()
 
 
-def playSound(filePath, currentMusic, directoryPath, logger, volume):
+def playSound(filePath, directoryPath, volume, logger):
     pygame.mixer.stop()
     pygame.mixer.init()
     soundPlayer = pygame.mixer.Sound(directoryPath + "/" + filePath)
@@ -63,7 +63,7 @@ def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, logg
     elif command == "play":
 
         songName = getFileToPlay(songList, logger)
-        soundPlayer = playSound(songName, soundPlayer, directoryPath, logger, volume)
+        soundPlayer = playSound(songName, directoryPath, volume, logger)
 
     elif command == "volume":
         volume = float(input("What would you like the volume to be between 0 for mute and 10?"))
