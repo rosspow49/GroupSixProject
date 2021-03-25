@@ -21,10 +21,10 @@ class InputTest(unittest.TestCase):
         filePath = "bensound-dubstep.wav"
         directoryPath = "../Music/"
         volume = 1
-        logger = IOLogger()
+        logger = IOLogger(False)
         fileExists = True
         try:
-            playSound(filePath, directoryPath, volume, logger)
+            playSound(directoryPath + filePath, volume, logger)
         except FileNotFoundError:
             fileExists = False
         self.assertTrue(fileExists)
