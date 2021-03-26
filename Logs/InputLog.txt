@@ -1,1 +1,13 @@
-play,1,volume,5,close,
+play
+1
+volume
+1
+stop
+play
+2
+volume
+5
+stop
+play
+1
+close
