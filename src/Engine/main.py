@@ -49,25 +49,33 @@ def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, logg
         soundPlayer = playSound(filePath, volume, logger)
 
     elif command == "volume":
-        volume = float(input("What would you like the volume to be between 0 for mute and 10?"))
+        volume = float(logger.TakeInput("What would you like the volume to be between 0 for mute and 10?"))
         volume = volume/10
+        playing = pygame.mixer.get_busy()
+        if playing:
+            pygame.mixer.Sound.set_volume(soundPlayer, volume)
+
+    elif command == "Close":
+        close = True
 
     else:
         logger.ShowOutput("That is not a valid command")
 
-    return soundPlayer, volume
+    return soundPlayer, volume, close
 
 
 def main():
     soundPlayer = ""
     directoryPath = "Music/"
-    optionsList = ["Play", "Stop", "Volume"]
+    optionsList = ["Play", "Stop", "Volume", "Close"]
     volume = 1.0
     InitialiseLogs()
     musicFiles = getPlaylist(InputDataFile(), directoryPath)
     logger = IOLogger(True)
     while True:
-        soundPlayer, volume = enterCommand(soundPlayer, musicFiles, directoryPath, optionsList, volume, logger)
+        soundPlayer, volume, close = enterCommand(soundPlayer, musicFiles, directoryPath, optionsList, volume, logger)
+        if close:
+            break
 
 
 if __name__ == '__main__':

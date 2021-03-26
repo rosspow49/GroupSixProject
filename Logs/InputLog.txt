@@ -1,1 +1,1 @@
-play,2,stop,play,2,play,2,stop,
+volume,10,play,1,volume,5,
