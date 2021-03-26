@@ -10,10 +10,5 @@ experience required to use this will be low
 The program will be capable of playing both mp3 and wav file formats for added
 variablity in user choice 
 
-Future versions of the program will hope to have other user features such as 
-volume control, selecting other songs, restarting current songs,
-the ability to shuffle playlists or select a track at random and automatic
-queing of next song
-
 
 ©GroupSix 2021
