@@ -16,11 +16,17 @@ def getPlaylist(inputType, directoryPath):
 
 def getFileToPlay(fileList, logger):
     displayFiles(fileList, logger)
-
-    fileIdentifier = logger.TakeInput("Please enter the track number:")
-    while int(fileIdentifier) not in range(len(fileList)):
-        logger.ShowOutput("This is an invalid track number.")
+    valid = False
+    while not valid:
         fileIdentifier = logger.TakeInput("Please enter the track number:")
+        try:
+            if int(fileIdentifier) not in range(len(fileList)):
+                logger.ShowOutput("This is an invalid track number.")
+            else:
+                valid = True
+        except:
+            logger.ShowOutput("That is not a number")
+
 
     if int(fileIdentifier) in range(len(fileList)):
         fileIdentifier = fileList[int(fileIdentifier)]
