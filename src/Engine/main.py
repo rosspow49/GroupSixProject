@@ -14,13 +14,19 @@ def getPlaylist(inputType, directoryPath):
     return playlist
 
 
-def getFileToPlay(fileList, logger):
+def getFileToPlay(fileList, logger=IOLogger(True)):
     displayFiles(fileList, logger)
-
-    fileIdentifier = logger.TakeInput("Please enter the track number:")
-    while int(fileIdentifier) not in range(len(fileList)):
-        logger.ShowOutput("This is an invalid track number.")
+    valid = False
+    while not valid:
         fileIdentifier = logger.TakeInput("Please enter the track number:")
+        try:
+            if int(fileIdentifier) not in range(len(fileList)):
+                logger.ShowOutput("This is an invalid track number.")
+            else:
+                valid = True
+        except:
+            logger.ShowOutput("That is not a number")
+
 
     if int(fileIdentifier) in range(len(fileList)):
         fileIdentifier = fileList[int(fileIdentifier)]
@@ -49,8 +55,14 @@ def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, clos
         soundPlayer = playSound(filePath, volume, logger)
 
     elif command == "volume":
-        volume = float(logger.TakeInput("What would you like the volume to be between 0 for mute and 10?"))
-        volume = volume/10
+        volumeChanged = False
+        while not volumeChanged:
+            volume = logger.TakeInput("What would you like the volume to be between 0 for mute and 10?")
+            try:
+                volume = float(volume)/10
+                volumeChanged = True
+            except:
+                logger.ShowOutput("This is not a valid number for volume")
         playing = pygame.mixer.get_busy()
         if playing:
             pygame.mixer.Sound.set_volume(soundPlayer, volume)
