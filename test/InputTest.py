@@ -2,7 +2,8 @@ import unittest
 
 from src.Data.InputDataFile import InputDataFile
 from src.Data.InputDataStub import InputDataStub
-from src.Engine.main import getPlaylist, PlaySound
+from src.Engine.main import getPlaylist, playSound
+from src.Display.IOLogger import IOLogger
 
 
 class InputTest(unittest.TestCase):
@@ -18,11 +19,12 @@ class InputTest(unittest.TestCase):
 
     def test_findFile(self):
         filePath = "bensound-dubstep.wav"
-        currentMusic = ""
-        directoryPath = "..\Music"
+        directoryPath = "../Music/"
+        volume = 1
+        logger = IOLogger(False)
         fileExists = True
         try:
-            test = PlaySound(filePath, currentMusic, directoryPath)
+            playSound(directoryPath + filePath, volume, logger)
         except FileNotFoundError:
             fileExists = False
         self.assertTrue(fileExists)

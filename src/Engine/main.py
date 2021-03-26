@@ -2,32 +2,17 @@ import pygame
 
 from src.Data.InputDataFile import InputDataFile
 from src.Data.InputDataStub import InputDataStub
+from src.Engine.trackControls import *
 from src.Display.ConsoleOutputs import *
 from src.Display.IOLogger import IOLogger
+
 pygame.mixer.init()
 
-
-
-def playSound(filePath, currentMusic, directoryPath, logger):
-    if pygame.mixer.get_busy():
-        currentMusic.stop()
-    pygame.mixer.init()
-    soundPlayer = pygame.mixer.Sound(directoryPath + "/" + filePath)
-    soundPlayer.play()
-    logger.ShowOutput("Now playing:" + filePath)
-
-    return soundPlayer
-
-def stopSound(soundPlayer, logger):
-    if pygame.mixer.get_busy():
-        soundPlayer.stop()
-        logger.ShowOutput("Song stopped.")
-    else:
-        logger.ShowOutput("There is no song playing at the moment")
 
 def getPlaylist(inputType, directoryPath):
     playlist = inputType.getRawData(directoryPath)
     return playlist
+
 
 def getFileToPlay(fileList, logger):
     displayFiles(fileList, logger)
@@ -42,14 +27,17 @@ def getFileToPlay(fileList, logger):
 
     return fileIdentifier
 
+
 def InitialiseLogs():
     with open("Logs/InputLog.txt", "w") as inputs:
         inputs.write("")
     with open("Logs/OutputLog.txt", "w") as outputs:
         outputs.write("")
 
-def enterCommand(soundPlayer, songList, directoryPath, logger = IOLogger()):
-    command = logger.TakeInput("Please enter a command")
+
+def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, logger):
+    print(optionsList)
+    command = logger.TakeInput("Please type one of the options").lower()
 
     if command == "stop":
         stopSound(soundPlayer, logger)
@@ -57,21 +45,29 @@ def enterCommand(soundPlayer, songList, directoryPath, logger = IOLogger()):
     elif command == "play":
 
         songName = getFileToPlay(songList, logger)
-        soundPlayer = playSound(songName, soundPlayer, directoryPath, logger)
+        filePath = directoryPath + songName
+        soundPlayer = playSound(filePath, volume, logger)
+
+    elif command == "volume":
+        volume = float(input("What would you like the volume to be between 0 for mute and 10?"))
+        volume = volume/10
 
     else:
         logger.ShowOutput("That is not a valid command")
 
-    return soundPlayer
+    return soundPlayer, volume
 
 
 def main():
     soundPlayer = ""
-    directoryPath = "Music"
+    directoryPath = "Music/"
+    optionsList = ["Play", "Stop", "Volume"]
+    volume = 1.0
     InitialiseLogs()
     musicFiles = getPlaylist(InputDataFile(), directoryPath)
+    logger = IOLogger(True)
     while True:
-        soundPlayer = enterCommand(soundPlayer, musicFiles, directoryPath)
+        soundPlayer, volume = enterCommand(soundPlayer, musicFiles, directoryPath, optionsList, volume, logger)
 
 
 if __name__ == '__main__':
