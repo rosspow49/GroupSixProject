@@ -55,7 +55,7 @@ def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, logg
         if playing:
             pygame.mixer.Sound.set_volume(soundPlayer, volume)
 
-    elif command == "Close":
+    elif command == "close":
         close = True
 
     else:
