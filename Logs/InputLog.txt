@@ -1,1 +1,1 @@
-close,
+play,1,volume,5,close,
