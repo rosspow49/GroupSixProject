@@ -55,8 +55,14 @@ def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, clos
         soundPlayer = playSound(filePath, volume, logger)
 
     elif command == "volume":
-        volume = float(logger.TakeInput("What would you like the volume to be between 0 for mute and 10?"))
-        volume = volume/10
+        volumeChanged = False
+        while not volumeChanged:
+            volume = logger.TakeInput("What would you like the volume to be between 0 for mute and 10?")
+            try:
+                volume = float(volume)/10
+                volumeChanged = True
+            except:
+                logger.ShowOutput("This is not a valid number for volume")
         playing = pygame.mixer.get_busy()
         if playing:
             pygame.mixer.Sound.set_volume(soundPlayer, volume)
