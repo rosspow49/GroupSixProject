@@ -42,7 +42,7 @@ def InitialiseLogs():
 
 
 def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, close, logger):
-    print(optionsList)
+    displayOptions(logger)
     command = logger.TakeInput("Please type one of the options").lower()
 
     if command == "stop":
@@ -76,15 +76,14 @@ def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, clos
     return soundPlayer, volume, close
 
 
-def main():
+def main(directoryPath="Music/", logger=IOLogger(True)):
     soundPlayer = ""
-    directoryPath = "Music/"
     optionsList = ["Play", "Stop", "Volume", "Close"]
     volume = 1.0
     close = False
-    InitialiseLogs()
+    if type(logger) == IOLogger:
+        InitialiseLogs()
     musicFiles = getPlaylist(InputDataFile(), directoryPath)
-    logger = IOLogger(True)
     while True:
         soundPlayer, volume, close = enterCommand(soundPlayer, musicFiles, directoryPath, optionsList, volume, close, logger)
         if close:

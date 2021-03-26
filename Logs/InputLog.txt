@@ -1,1 +1,4 @@
-play,1,volume,5,close,
+play
+0
+stop
+close

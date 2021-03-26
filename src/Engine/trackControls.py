@@ -5,7 +5,7 @@ def playSound(filePath, volume, logger):
     soundPlayer = pygame.mixer.Sound(filePath)
     pygame.mixer.Sound.set_volume(soundPlayer, volume)
     soundPlayer.play()
-    logger.ShowOutput("Now playing: " + filePath)
+    print("Now playing: " + filePath)
 
     return soundPlayer
 
