@@ -1,4 +1,6 @@
-class IOLogger():
+from src.Display.IO import IO
+
+class IOLogger(IO):
 
     logToFile = True
 
@@ -9,11 +11,11 @@ class IOLogger():
         command = input(message)
         if self.logToFile:
             with open("Logs/InputLog.txt", "a")as log:
-                log.write(command + ",")
+                log.write(command + "\n")
         return command
 
     def ShowOutput(self, message):
         if self.logToFile:
             with open("Logs/OutputLog.txt", "a")as log:
-                log.write(message + ",")
+                log.write(message + "\n")
         print(message)
