@@ -2,7 +2,7 @@ class IOLogger():
 
     logToFile = True
 
-    def __init__(self, logToFile=True):
+    def __init__(self, logToFile):
         self.logToFile = logToFile
 
     def TakeInput(self, message):

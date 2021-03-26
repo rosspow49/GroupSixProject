@@ -14,7 +14,7 @@ def getPlaylist(inputType, directoryPath):
     return playlist
 
 
-def getFileToPlay(fileList, logger):
+def getFileToPlay(fileList, logger=IOLogger(True)):
     displayFiles(fileList, logger)
     valid = False
     while not valid:
