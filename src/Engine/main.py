@@ -36,7 +36,7 @@ def InitialiseLogs():
 
 
 def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, close, logger):
-    print(optionsList)
+    displayOptions(logger)
     command = logger.TakeInput("Please type one of the options").lower()
 
     if command == "stop":
