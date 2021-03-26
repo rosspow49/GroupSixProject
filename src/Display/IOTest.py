@@ -8,7 +8,6 @@ class IOTest(IO):
 
     def SetInputList(self, inputList):
         self.inputList = inputList
-        print(self.inputList)
 
     def TakeInput(self, message):
         if len(self.inputList) > 0:

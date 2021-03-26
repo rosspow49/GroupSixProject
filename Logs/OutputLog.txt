@@ -1,11 +1,7 @@
+['play', 'stop', 'volume']
 0:Beat Of Success.mp3
 1:bensound-dubstep.wav
 2:The Swag Is Back.mp3
+['play', 'stop', 'volume']
 Song stopped.
-0:Beat Of Success.mp3
-1:bensound-dubstep.wav
-2:The Swag Is Back.mp3
-Song stopped.
-0:Beat Of Success.mp3
-1:bensound-dubstep.wav
-2:The Swag Is Back.mp3
+['play', 'stop', 'volume']
