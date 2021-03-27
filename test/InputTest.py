@@ -22,12 +22,12 @@ class InputTest(unittest.TestCase):
         directoryPath = "../Music/"
         volume = 1
         logger = IOLogger(False)
-        fileExists = True
         try:
             playSound(directoryPath + filePath, volume, logger)
         except FileNotFoundError:
-            fileExists = False
-        self.assertTrue(fileExists)
+            self.assertRaises(FileNotFoundError, playSound(directoryPath + filePath, volume, logger))
+
+
 
 
 if __name__ == '__main__':
