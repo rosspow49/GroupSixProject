@@ -8,7 +8,7 @@ from src.Engine.trackControls import playSound
 from unittest.mock import MagicMock
 
 
-class VolumeControlsTest(unittest.TestCase):
+class SetVolumeTest(unittest.TestCase):
     def test_setVolumeToValidValueNoPlayback(self):
         pygame.mixer.init()
         filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
@@ -110,22 +110,6 @@ class VolumeControlsTest(unittest.TestCase):
         logger = IOTest()
         soundPlayer = playSound(filePath, initialVolume, logger)
         self.assertRaises(TypeError, setVolume, newVolume, soundPlayer)
-
-        pygame.mixer.quit()
-
-    def test_setMultipleVolumes(self):
-        pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
-        initialVolume = 1
-        newVolumes = [0.5, 1, 0]
-        logger = IOTest()
-        soundPlayer = playSound(filePath, initialVolume, logger)
-        setVolume(newVolumes[0], soundPlayer)
-        self.assertEqual(0.5, pygame.mixer.Sound.get_volume(soundPlayer))
-        setVolume(newVolumes[1], soundPlayer)
-        self.assertEqual(1, pygame.mixer.Sound.get_volume(soundPlayer))
-        setVolume(newVolumes[2], soundPlayer)
-        self.assertEqual(0, pygame.mixer.Sound.get_volume(soundPlayer))
 
         pygame.mixer.quit()
 
