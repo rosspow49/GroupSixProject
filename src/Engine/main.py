@@ -6,6 +6,7 @@ from src.Engine.trackControls import *
 from src.Display.ConsoleOutputs import *
 from src.Display.IOLogger import IOLogger
 from src.Engine.volumeControls import *
+from Commands import Commands
 
 pygame.mixer.init()
 
@@ -33,7 +34,6 @@ def getFileToPlay(fileList, logger=IOLogger(True)):
         except:
             logger.ShowOutput("That is not a number")
 
-
     if int(fileIdentifier) in range(len(fileList)):
         fileIdentifier = fileList[int(fileIdentifier)]
 
@@ -51,19 +51,23 @@ def enterCommand(soundPlayer, songList, directoryPath, volume, close, logger):
     displayOptions(logger)
     command = logger.TakeInput("Please type one of the options").lower()
 
-    if command == "stop":
+    # stop
+    if command in Commands.STOP.value:
         stopSound(soundPlayer, logger)
 
-    elif command == "play":
+    # play
+    elif command in Commands.PLAY.value:
         songName = getFileToPlay(songList, logger)
         filePath = directoryPath + songName
         soundPlayer = playSound(filePath, volume, logger)
 
-    elif command == "volume":
+    # volume control
+    elif command in Commands.VOLUME.value:
         volume = getVolume(logger)
         setVolume(volume, soundPlayer)
 
-    elif command == "close":
+    # close program
+    elif command in Commands.CLOSE.value:
         close = True
 
     else:
