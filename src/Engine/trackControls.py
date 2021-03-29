@@ -1,9 +1,12 @@
 import pygame
 
+from src.Engine.volumeControls import setVolume
+
+
 def playSound(filePath, volume, logger):
     pygame.mixer.stop()
     soundPlayer = pygame.mixer.Sound(filePath)
-    pygame.mixer.Sound.set_volume(soundPlayer, volume)
+    setVolume(volume, soundPlayer)
     soundPlayer.play()
     print("Now playing: " + filePath)
 

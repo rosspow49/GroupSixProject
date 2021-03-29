@@ -10,10 +10,8 @@ class IOTest(IO):
         self.inputList = inputList
 
     def TakeInput(self, message):
-        if len(self.inputList) > 0:
-            command = self.inputList.pop(0)
-            return command
-        return ""
+        command = self.inputList.pop(0)
+        return command
 
     def ShowOutput(self, message):
         self.outputList.append(message)

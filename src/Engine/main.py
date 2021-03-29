@@ -5,6 +5,7 @@ from src.Data.InputDataStub import InputDataStub
 from src.Engine.trackControls import *
 from src.Display.ConsoleOutputs import *
 from src.Display.IOLogger import IOLogger
+from src.Engine.volumeControls import *
 
 pygame.mixer.init()
 
@@ -41,7 +42,7 @@ def InitialiseLogs():
         outputs.write("")
 
 
-def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, close, logger):
+def enterCommand(soundPlayer, songList, directoryPath, volume, close, logger):
     displayOptions(logger)
     command = logger.TakeInput("Please type one of the options").lower()
 
@@ -49,23 +50,13 @@ def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, clos
         stopSound(soundPlayer, logger)
 
     elif command == "play":
-
         songName = getFileToPlay(songList, logger)
         filePath = directoryPath + songName
         soundPlayer = playSound(filePath, volume, logger)
 
     elif command == "volume":
-        volumeChanged = False
-        while not volumeChanged:
-            volume = logger.TakeInput("What would you like the volume to be between 0 for mute and 10?")
-            try:
-                volume = float(volume)/10
-                volumeChanged = True
-            except:
-                logger.ShowOutput("This is not a valid number for volume")
-        playing = pygame.mixer.get_busy()
-        if playing:
-            pygame.mixer.Sound.set_volume(soundPlayer, volume)
+        volume = getVolume(logger)
+        setVolume(volume, soundPlayer)
 
     elif command == "close":
         close = True
@@ -78,14 +69,13 @@ def enterCommand(soundPlayer, songList, directoryPath, optionsList, volume, clos
 
 def main(directoryPath="Music/", logger=IOLogger(True)):
     soundPlayer = ""
-    optionsList = ["Play", "Stop", "Volume", "Close"]
     volume = 1.0
     close = False
     if type(logger) == IOLogger:
         InitialiseLogs()
     musicFiles = getPlaylist(InputDataFile(), directoryPath)
     while True:
-        soundPlayer, volume, close = enterCommand(soundPlayer, musicFiles, directoryPath, optionsList, volume, close, logger)
+        soundPlayer, volume, close = enterCommand(soundPlayer, musicFiles, directoryPath, volume, close, logger)
         if close:
             break
 
