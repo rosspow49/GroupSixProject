@@ -6,7 +6,7 @@ from src.Engine.trackControls import *
 from src.Display.ConsoleOutputs import *
 from src.Display.IOLogger import IOLogger
 from src.Engine.volumeControls import *
-from Commands import Commands
+from src.Engine.Commands import Commands
 
 pygame.mixer.init()
 
