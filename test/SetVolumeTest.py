@@ -8,7 +8,7 @@ from src.Engine.trackControls import playSound
 from unittest.mock import MagicMock
 
 
-class VolumeControlsTest(unittest.TestCase):
+class SetVolumeTest(unittest.TestCase):
     def test_setVolumeToValidValueNoPlayback(self):
         pygame.mixer.init()
         filePath = "../src/Data/stubMusic/bensound-dubstep.wav"

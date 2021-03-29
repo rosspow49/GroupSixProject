@@ -14,10 +14,10 @@ def getVolume(logger):
             if volume < 0 or volume > 10:
                 raise ValueError
 
+            logger.ShowOutput("Volume changed to " + str(volume))
             volume = volume / 10
-            volumeChanged = True
+
+            return volume
 
         except:
             logger.ShowOutput("This is not a valid number for volume")
-    logger.ShowOutput("Volume changed to " + str(volume*10))
-    return volume
