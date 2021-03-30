@@ -1,4 +1,4 @@
-from src.Data.readLogFile import readLogFile
+from src.Data.ReadLogFile import readLogFile
 from src.Display.IO import IO
 
 class IOTest(IO):
@@ -6,18 +6,18 @@ class IOTest(IO):
     inputList = []
     outputList = []
 
-    def SetInputList(self, inputList):
+    def setInputList(self, inputList):
         self.inputList = inputList
 
-    def TakeInput(self, message):
+    def takeInput(self, message):
         command = self.inputList.pop(0)
         return command
 
-    def ShowOutput(self, message):
+    def showOutput(self, message):
         self.outputList.append(message)
 
-    def GetInputList(self):
+    def getInputList(self):
         return self.inputList
 
-    def GetOutputList(self):
+    def getOutputList(self):
         return self.outputList

@@ -1,6 +1,6 @@
 import pygame
 
-from src.Engine.volumeControls import setVolume
+from src.Engine.VolumeControls import setVolume
 musicPlaying = True
 
 
@@ -17,9 +17,9 @@ def playSound(filePath, volume, logger):
 def stopSound(soundPlayer, logger):
     if pygame.mixer.get_busy():
         soundPlayer.stop()
-        logger.ShowOutput("Song stopped.")
+        logger.showOutput("Song stopped.")
     else:
-        logger.ShowOutput("There is no song playing at the moment")
+        logger.showOutput("There is no song playing at the moment")
 
 
 def playPause(logger):
@@ -30,11 +30,11 @@ def playPause(logger):
         if musicPlaying:
             musicPlaying = False
             pygame.mixer.pause()
-            logger.ShowOutput("Pausing Song")
+            logger.showOutput("Pausing Song")
         else:
             musicPlaying = True
             pygame.mixer.unpause()
-            logger.ShowOutput("Resuming song")
+            logger.showOutput("Resuming song")
 
 
 

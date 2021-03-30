@@ -3,7 +3,7 @@ import unittest
 from src.Data.InputDataFile import InputDataFile
 from src.Data.InputDataStub import InputDataStub
 from src.Display.IOTest import IOTest
-from src.Engine.main import getPlaylist, playSound
+from src.Engine.Main import getPlaylist, playSound
 from unittest.mock import MagicMock
 
 
@@ -34,7 +34,7 @@ class InputTest(unittest.TestCase):
         logger = IOTest()
         InputDataFile.getRawData = MagicMock(side_effect=FileNotFoundError)
         playlist = getPlaylist(inputType, directoryPath, logger)
-        self.assertEqual("Error. Directory was not found. Switching to stub.", logger.GetOutputList()[-1])
+        self.assertEqual("Error. Directory was not found. Switching to stub.", logger.getOutputList()[-1])
 
 
 if __name__ == '__main__':

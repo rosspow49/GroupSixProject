@@ -1,8 +1,8 @@
 import unittest
 
-from src.Data.readLogFile import readLogFile
+from src.Data.ReadLogFile import readLogFile
 from src.Display.IOTest import IOTest
-from src.Engine.main import main as musicPlayerMain
+from src.Engine.Main import main as musicPlayerMain
 
 
 class IOLoggerTest(unittest.TestCase):
@@ -11,9 +11,9 @@ class IOLoggerTest(unittest.TestCase):
         logInput = readLogFile("../Logs/InputLog.txt")
         logOutput = readLogFile("../Logs/OutputLog.txt")
         logger = IOTest()
-        logger.SetInputList(logInput)
+        logger.setInputList(logInput)
         musicPlayerMain("../Music/", logger)
-        testOutput = logger.GetOutputList()
+        testOutput = logger.getOutputList()
 
         self.assertEqual(testOutput, logOutput)
 
