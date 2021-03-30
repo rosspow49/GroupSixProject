@@ -28,6 +28,14 @@ class InputTest(unittest.TestCase):
         playlist = getPlaylist(inputType, directoryPath, logger)
         self.assertEqual(playlist[0], "stub_bensound-dubstep.wav")
 
+    def test_getPlaylistFileNotFoundMockOutput(self):
+        inputType = InputDataFile()
+        directoryPath = "missing file"
+        logger = IOTest()
+        InputDataFile.getRawData = MagicMock(side_effect=FileNotFoundError)
+        playlist = getPlaylist(inputType, directoryPath, logger)
+        self.assertEqual("Error. Directory was not found. Switching to stub.", logger.GetOutputList()[-1])
+
 
 if __name__ == '__main__':
     unittest.main()
