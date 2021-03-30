@@ -46,7 +46,7 @@ def initialiseLogs():
 
 
 def enterCommand(soundPlayer, songList, directoryPath, volume, close, logger):
-    displayOptions(logger)
+    displayCommands(logger)
     command = logger.takeInput("Please type one of the options").lower()
 
     # stop
