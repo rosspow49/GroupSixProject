@@ -11,7 +11,7 @@ from unittest.mock import MagicMock
 class SetVolumeTest(unittest.TestCase):
     def test_setVolumeToValidValueNoPlayback(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         initialVolume = 1
         newVolume = 0.5
         logger = IOTest()
@@ -24,7 +24,7 @@ class SetVolumeTest(unittest.TestCase):
 
     def test_setVolumeToValidValueDuringPlayback(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         initialVolume = 1
         newVolume = 0.5
         logger = IOTest()
@@ -45,7 +45,7 @@ class SetVolumeTest(unittest.TestCase):
 
     def test_setVolumeToValidValueDuringPlaybackMock(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         initialVolume = 1
         logger = IOTest()
         soundPlayer = playSound(filePath, initialVolume, logger)
@@ -57,7 +57,7 @@ class SetVolumeTest(unittest.TestCase):
 
     def test_setVolumeToMute(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         initialVolume = 1
         newVolume = 0
         logger = IOTest()
@@ -69,7 +69,7 @@ class SetVolumeTest(unittest.TestCase):
 
     def test_setVolumeToMax(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         initialVolume = 0.5
         newVolume = 1
         logger = IOTest()
@@ -81,7 +81,7 @@ class SetVolumeTest(unittest.TestCase):
 
     def test_setOutOfBoundsVolume(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         initialVolume = 1
         newVolume = -1
         logger = IOTest()
@@ -93,7 +93,7 @@ class SetVolumeTest(unittest.TestCase):
 
     def test_setInvalidVolume(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         initialVolume = 1
         newVolume = ""
         logger = IOTest()
@@ -104,7 +104,7 @@ class SetVolumeTest(unittest.TestCase):
 
     def test_setNullVolume(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         initialVolume = 0.5
         newVolume = None
         logger = IOTest()
@@ -115,7 +115,7 @@ class SetVolumeTest(unittest.TestCase):
 
     def test_setMultipleVolumesWithMock(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         initialVolume = 1
         logger = IOTest()
         soundPlayer = playSound(filePath, initialVolume, logger)
