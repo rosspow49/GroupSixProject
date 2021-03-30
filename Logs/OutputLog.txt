@@ -1,9 +1,22 @@
-['play', 'stop', 'volume', 'close']
+play
+stop
+volume
+close
+pause
 0:Beat Of Success.mp3
 1:bensound-dubstep.wav
 2:The Swag Is Back.mp3
-['play', 'stop', 'volume', 'close']
-Volume changed to 2.0
-['play', 'stop', 'volume', 'close']
-Song stopped.
-['play', 'stop', 'volume', 'close']
+play
+stop
+volume
+close
+pause
+Pausing Song
+play
+stop
+volume
+close
+pause
+0:Beat Of Success.mp3
+1:bensound-dubstep.wav
+2:The Swag Is Back.mp3

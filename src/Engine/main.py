@@ -1,12 +1,10 @@
-import pygame
-
 from src.Data.InputDataFile import InputDataFile
 from src.Data.InputDataStub import InputDataStub
-from src.Engine.trackControls import *
 from src.Display.ConsoleOutputs import *
 from src.Display.IOLogger import IOLogger
-from src.Engine.volumeControls import *
 from src.Engine.Commands import Commands
+from src.Engine.trackControls import *
+from src.Engine.volumeControls import *
 
 pygame.mixer.init()
 
