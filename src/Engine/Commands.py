@@ -6,3 +6,4 @@ class Commands(Enum):
     STOP = ["stop", "s"]
     VOLUME = ["volume", "v"]
     CLOSE = ["close", "c"]
+    PAUSE = ["pause", "play"]

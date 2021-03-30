@@ -1,4 +1,4 @@
-optionsList = ["play", "stop", "volume"]
+from ..Engine.Commands import Commands
 
 def displayFiles(fileList, logger):
     for entryNumber, entry in enumerate(fileList):
@@ -6,4 +6,5 @@ def displayFiles(fileList, logger):
 
 
 def displayOptions(logger):
-    logger.ShowOutput(str(optionsList))
+    for command in Commands:
+        logger.ShowOutput(command.value[0])
