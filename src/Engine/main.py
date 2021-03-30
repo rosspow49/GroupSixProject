@@ -66,6 +66,10 @@ def enterCommand(soundPlayer, songList, directoryPath, volume, close, logger):
         volume = getVolume(logger)
         setVolume(volume, soundPlayer)
 
+    # pause/play
+    elif command in Commands.PAUSE.value:
+        playPause(logger)
+
     # close program
     elif command in Commands.CLOSE.value:
         close = True
