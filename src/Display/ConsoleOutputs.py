@@ -1,4 +1,4 @@
-optionsList = ["play", "stop", "volume"]
+optionsList = ["play", "stop", "volume", "close"]
 
 def displayFiles(fileList, logger):
     for entryNumber, entry in enumerate(fileList):

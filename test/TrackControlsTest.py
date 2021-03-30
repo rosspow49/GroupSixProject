@@ -9,7 +9,7 @@ from src.Engine.trackControls import playSound, stopSound
 class TrackControlsTest(unittest.TestCase):
     def test_PlaySoundWithNoSongPlaying(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         logger = IOLogger(False)
         soundPlayer = playSound(filePath, 1, logger)
         self.assertTrue(pygame.mixer.get_busy())
@@ -18,7 +18,7 @@ class TrackControlsTest(unittest.TestCase):
 
     def test_PlaySoundWithSongPlaying(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         logger = IOLogger(False)
         soundPlayer = playSound(filePath, 1, logger)
         newsoundPlayer = playSound(filePath, 1, logger)
@@ -28,7 +28,7 @@ class TrackControlsTest(unittest.TestCase):
 
     def test_stopSoundWithSongPlaying(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         logger = IOLogger(False)
         soundPlayer = playSound(filePath, 1, logger)
         stopSound(soundPlayer, logger)
@@ -38,7 +38,7 @@ class TrackControlsTest(unittest.TestCase):
 
     def test_stopSoundWithNoSongPlaying(self):
         pygame.mixer.init()
-        filePath = "../src/Data/stubMusic/bensound-dubstep.wav"
+        filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         logger = IOLogger(False)
         soundPlayer = playSound(filePath, 1, logger)
         soundPlayer.stop()
