@@ -6,13 +6,18 @@ from src.Engine.trackControls import *
 from src.Display.ConsoleOutputs import *
 from src.Display.IOLogger import IOLogger
 from src.Engine.volumeControls import *
-from Commands import Commands
+from src.Engine.Commands import Commands
 
 pygame.mixer.init()
 
 
-def getPlaylist(inputType, directoryPath):
-    playlist = inputType.getRawData(directoryPath)
+def getPlaylist(inputType, directoryPath, logger):
+    try:
+        playlist = inputType.getRawData(directoryPath)
+    except FileNotFoundError:
+        logger.ShowOutput("Error. Directory was not found. Switching to stub.")
+        inputSource = InputDataStub()
+        playlist = inputSource.getRawData(directoryPath)
     return playlist
 
 
@@ -77,7 +82,7 @@ def main(directoryPath="Music/", logger=IOLogger(True)):
     close = False
     if type(logger) == IOLogger:
         InitialiseLogs()
-    musicFiles = getPlaylist(InputDataFile(), directoryPath)
+    musicFiles = getPlaylist(InputDataFile(), directoryPath, logger)
     while True:
         soundPlayer, volume, close = enterCommand(soundPlayer, musicFiles, directoryPath, volume, close, logger)
         if close:
