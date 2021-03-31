@@ -1,6 +1,7 @@
 from src.Data.InputDataFile import InputDataFile
 from src.Data.InputDataStub import InputDataStub
 from src.Display.ConsoleOutputs import *
+from src.Display.ConsoleInputs import *
 from src.Display.IOLogger import IOLogger
 from src.Engine.Commands import Commands
 from src.Engine.TrackControls import *
@@ -17,26 +18,6 @@ def getPlaylist(inputType, directoryPath, logger):
         inputSource = InputDataStub()
         playlist = inputSource.getRawData(directoryPath)
     return playlist
-
-
-def getFileToPlay(fileList, logger=IOLogger(True)):
-    displayFiles(fileList, logger)
-    valid = False
-    while not valid:
-        fileIdentifier = logger.takeInput("Please enter the track number:")
-        try:
-            if int(fileIdentifier) not in range(len(fileList)):
-                logger.showOutput("This is an invalid track number.")
-            else:
-                valid = True
-        except:
-            logger.showOutput("That is not a number")
-
-    if int(fileIdentifier) in range(len(fileList)):
-        fileIdentifier = fileList[int(fileIdentifier)]
-
-    return fileIdentifier
-
 
 def initialiseLogs():
     with open("Logs/InputLog.txt", "w") as inputs:
@@ -55,6 +36,7 @@ def enterCommand(soundPlayer, songList, directoryPath, volume, close, logger):
 
     # play
     elif command in Commands.PLAY.value:
+        displayFiles(songList, logger)
         songName = getFileToPlay(songList, logger)
         filePath = directoryPath + songName
         soundPlayer = playSound(filePath, volume, logger)
