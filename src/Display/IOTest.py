@@ -1,10 +1,11 @@
-from src.Data.ReadLogFile import readLogFile
+from src.Data.readLogFile import readLogFile
 from src.Display.IO import IO
 
 class IOTest(IO):
 
-    inputList = []
-    outputList = []
+    def __init__(self):
+        self.inputList = []
+        self.outputList = []
 
     def setInputList(self, inputList):
         self.inputList = inputList

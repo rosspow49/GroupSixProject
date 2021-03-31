@@ -1,6 +1,6 @@
 import unittest
 
-from src.Data.ReadLogFile import readLogFile
+from src.Data.readLogFile import readLogFile
 from src.Display.IOTest import IOTest
 from src.Engine.Main import main as musicPlayerMain
 

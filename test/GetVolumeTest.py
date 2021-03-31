@@ -43,6 +43,13 @@ class GetVolumeTest(unittest.TestCase):
         self.assertEqual(1, getVolume(logger))
         self.assertEqual(0, getVolume(logger))
 
+    def test_getMultipleVolumesMockThirdOutput(self):
+        logger = IOTest()
+        logger.takeInput = MagicMock(side_effect=[5, 10, 0])
+        getVolume(logger)
+        getVolume(logger)
+        self.assertEqual(0, getVolume(logger))
+
 
 
 if __name__ == '__main__':
