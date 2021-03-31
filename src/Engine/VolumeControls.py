@@ -16,8 +16,7 @@ def getVolume(logger):
 
             logger.showOutput("Volume changed to " + str(volume))
             volume = volume / 10
-
-            return volume
-
+            volumeChanged = True
         except:
             logger.showOutput("This is not a valid number for volume")
+    return volume
