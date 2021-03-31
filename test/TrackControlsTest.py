@@ -3,11 +3,11 @@ import unittest
 import pygame
 
 from src.Display.IOLogger import IOLogger
-from src.Engine.trackControls import playSound, stopSound
+from src.Engine.TrackControls import playSound, stopSound
 
 
 class TrackControlsTest(unittest.TestCase):
-    def test_PlaySoundWithNoSongPlaying(self):
+    def test_playSoundWithNoSongPlaying(self):
         pygame.mixer.init()
         filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         logger = IOLogger(False)
@@ -16,7 +16,7 @@ class TrackControlsTest(unittest.TestCase):
 
         pygame.mixer.quit()
 
-    def test_PlaySoundWithSongPlaying(self):
+    def test_playSoundWithSongPlaying(self):
         pygame.mixer.init()
         filePath = "../src/Data/stubMusic/stub_bensound-dubstep.wav"
         logger = IOLogger(False)

@@ -1,6 +1,5 @@
 play
+1
+pause
+play
 0
-volume
-2
-stop
-close

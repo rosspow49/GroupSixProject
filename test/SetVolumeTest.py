@@ -3,8 +3,8 @@ import unittest
 import pygame
 
 from src.Display.IOTest import IOTest
-from src.Engine.volumeControls import setVolume, getVolume
-from src.Engine.trackControls import playSound
+from src.Engine.VolumeControls import setVolume, getVolume
+from src.Engine.TrackControls import playSound
 from unittest.mock import MagicMock
 
 
